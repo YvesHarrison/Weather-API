@@ -34,31 +34,57 @@ function drawdaytable(forecast){
     }
 }
 
+function check_extreme(forecast){
+    let extreme = false;
+    let show = "";
+    for(let i=0;i<forecast.length;++i){
+        let temp = Number(forecast[i].main.temp);
+        if(temp<32){
+            show="The temperature will be below 32℉ at " + forecast[i].dt_txt;
+            extreme = true;
+            break; 
+        }
+        if(temp>86){
+            show="The temperature will be above 86℉ at " + forecast[i].dt_txt;
+            extreme = true;
+            break; 
+        }
+    }
+    if(extreme){
+        document.getElementById("extreme").innerHTML=show;
+    }
+}
+
 $(document).ready(function () {
-	console.log("hhh");
     $("#card-1").hide();
-    $("#loading").show();
     $("#day_table").hide();
     $("#hour_table").hide();
 
 	$("#Search").click(function(){
-        $("#loading").show();
 		let value = document.getElementById("form").value;
 		let type = document.getElementById("select").value;
         $("#day_table tbody").html("");
         $("#hour_table tbody").html("");
         $("#show_table").attr("checked", true);
-
+        $("#warning").hide();
 		if(type==="cityname"){
-
 			$.ajax({
         		url: '/city_name',
         		type: 'POST',
         		data:{city_name:value},
         		success: function (data) {
-                    show(data.weather,data.forecast);
-                    drawhourtable(data.forecast.list);
-                    drawdaytable(data.forecast.list);
+                    
+                    if(data.weather&&data.forecast){
+                        show(data.weather,data.forecast);
+                        check_extreme(data.forecast.list);
+                        drawhourtable(data.forecast.list);
+                        drawdaytable(data.forecast.list);
+                    }
+                    else if(data.error.message){
+                        document.getElementById("warning").innerHTML=data.error.message;
+                        $("#warning").show();
+                        $("#card-1").hide();
+                    }
                     
         		}
     		});
@@ -69,15 +95,24 @@ $(document).ready(function () {
         		type: 'POST',
         		data:{city_id:value},
         		success: function (data) {
-            		show(data.weather,data.forecast);
-                    drawhourtable(data.forecast.list);
-                    drawdaytable(data.forecast.list);
+
+            		if(data.weather&&data.forecast){
+                        show(data.weather,data.forecast);
+                        check_extreme(data.forecast.list);
+                        drawhourtable(data.forecast.list);
+                        drawdaytable(data.forecast.list);
+                    }
+                    else if(data.error.message){
+                        document.getElementById("warning").innerHTML=data.error.message;
+                        $("#warning").show();
+                        $("#card-1").hide();
+                    }
         		}
     		});
 		}
 		return false;
 	});
-    
+
     if($("#show_table").is(":checked")){
             $("#day_table").hide();
             $("#hour_table").show();

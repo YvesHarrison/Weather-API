@@ -22,14 +22,17 @@ router.post("/city_name",async(req,res,next)=>{
 	try{
 		//xss
 		let city_name = xss(req.body.city_name);
-		console.log(city_name);
+		
 		let weather = await axios.get(weather_api+city_name+"&units=imperial&APPID="+key);
 		let forecast = await axios.get(forecast_api+city_name+"&units=imperial&APPID="+key);
 		
 		res.json({weather:weather.data,forecast:forecast.data});
 	}
 	catch(e){
-		res.status(500).json({ error: e });
+		if(e.response.data){
+			res.json({ error: e.response.data });
+		}
+		else res.status(500).json({ error: e});
 	}
 });
 
@@ -37,15 +40,19 @@ router.post("/city_id",async(req,res)=>{
 	try{
 		//xss
 		let city_id = xss(req.body.city_id);
-		console.log(city_id);
+		
 		let weather = await axios.get(weather_api_id+city_id+"&units=imperial&APPID="+key);
 		let forecast = await axios.get(forecast_api_id+city_id+"&units=imperial&APPID="+key);
 		
 		res.json({weather:weather.data,forecast:forecast.data});
 	}
 	catch(e){
-		res.status(500).json({ error: e });
+		if(e.response.data){
+			res.json({ error: e.response.data });
+		}
+		else res.status(500).json({ error: e});
 	}
 });
 
 module.exports = router;
+
