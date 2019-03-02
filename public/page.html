@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Weather</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/event.js"></script>
+    <script src="js/tota11y.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div>
+            <form class="form-inline my-2 my-lg-0" style="margin-left: 15rem;">
+              <input class="form-control mr-sm-2" id = "form" placeholder="Input City Name to Search for Weather" style="width: 20rem;aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" id="Search">Search</button>
+            </form>
+          </div>
+          <div>
+            <select name = "data type" style="margin-left: 2rem;" id = "select">
+              <option value="cityname"> City Name</option>
+              <option value="cityid"> City ID</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+      
+      <div id="card-1" class="card" style="width: 100%;">
+          <!-- <img class="card-img-top" src="images/airpods.jpg" alt="Card image cap" style="width: 50rem;height:10rem;"> -->
+          <div class="card-body">
+            <h2 class="card-title" id = "cityname"></h2>
+              <p class="card-text"><h3 id = "weather_description"></h3></p>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong1">
+                  More Info
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalLong1" tabindex="1" role="dialog" aria-labelledby="exampleModalLongTitle"  aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h2 class="modal-title" id = "citynamemodal"></h2>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p id="t"></p>
+
+                      <p id="p"></p>
+
+                      <p id="h"></p>
+
+                      <p id="t_max"></p>
+
+                      <p id="t_min"></p>
+                    </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <table class="table table-striped" id="day_table">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Temperature</th>
+            <th scope="col">Weather</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+      <table class="table table-striped" id="hour_table">
+        <thead>
+          <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Temperature</th>
+            <th scope="col">Weather</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+
+    </main>
+  </body>
+</html>
