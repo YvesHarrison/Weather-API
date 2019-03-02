@@ -45,7 +45,9 @@ $(document).ready(function () {
         $("#loading").show();
 		let value = document.getElementById("form").value;
 		let type = document.getElementById("select").value;
-        
+        $("#day_table tbody").html("");
+        $("#hour_table tbody").html("");
+        $("#show_table").attr("checked", true);
 
 		if(type==="cityname"){
 
@@ -54,10 +56,10 @@ $(document).ready(function () {
         		type: 'POST',
         		data:{city_name:value},
         		success: function (data) {
-                    $("#loading").hide();
                     show(data.weather,data.forecast);
                     drawhourtable(data.forecast.list);
                     drawdaytable(data.forecast.list);
+                    
         		}
     		});
 		}
@@ -67,14 +69,22 @@ $(document).ready(function () {
         		type: 'POST',
         		data:{city_id:value},
         		success: function (data) {
-            		
+            		show(data.weather,data.forecast);
+                    drawhourtable(data.forecast.list);
+                    drawdaytable(data.forecast.list);
         		}
     		});
 		}
 		return false;
 	});
-
     
+    if($("#show_table").is(":checked")){
+            $("#day_table").hide();
+            $("#hour_table").show();
+    }else{
+            $("#day_table").show();
+            $("#hour_table").hide();
+    }
 
     $("#show_table").click(function(){
         if($(this).is(":checked")){
