@@ -1,5 +1,5 @@
 {
-  "name": "12.sass-gulp",
+  "name": "Weather-API",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -7,7 +7,7 @@
     "test": "node app.js",
     "start": "node app.js"
   },
-  "author": "Xinzhe Li 10434405",
+  "author": "Xinzhe Li",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",

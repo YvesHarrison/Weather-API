@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Weather</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/event.js"></script>
     <script src="js/tota11y.min.js"></script>
@@ -28,7 +28,10 @@
           </div>
         </div>
       </nav>
-      
+      <div class="spinner-border" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+
       <div id="card-1" class="card" style="width: 100%;">
           <!-- <img class="card-img-top" src="images/airpods.jpg" alt="Card image cap" style="width: 50rem;height:10rem;"> -->
           <div class="card-body">
@@ -58,6 +61,35 @@
                       <p id="t_max"></p>
 
                       <p id="t_min"></p>
+                      <div class="switch-box is-weather">
+                        <label for="show_table" class="switch-box-label">Daily</label>
+                        <input id="show_table" class="switch-box-input" type="checkbox" checked />
+                        <label for="show_table" class="switch-box-slider"></label>
+                        <label for="show_table" class="switch-box-label">Hourly</label>
+                      </div>
+                      <table class="table table-striped" id="day_table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Time</th>
+                            <th scope="col">Temperature</th>
+                            <th scope="col">Weather</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+
+                      <table class="table table-striped" id="hour_table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Time</th>
+                            <th scope="col">Temperature</th>
+                            <th scope="col">Weather</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
                     </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -69,29 +101,7 @@
           </div>
       </div>
 
-      <table class="table table-striped" id="day_table">
-        <thead>
-          <tr>
-            <th scope="col">Time</th>
-            <th scope="col">Temperature</th>
-            <th scope="col">Weather</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-
-      <table class="table table-striped" id="hour_table">
-        <thead>
-          <tr>
-            <th scope="col">Time</th>
-            <th scope="col">Temperature</th>
-            <th scope="col">Weather</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+      
 
     </main>
   </body>

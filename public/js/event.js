@@ -37,20 +37,24 @@ function drawdaytable(forecast){
 $(document).ready(function () {
 	console.log("hhh");
     $("#card-1").hide();
+    $("#loading").show();
     $("#day_table").hide();
     $("#hour_table").hide();
-    
+
 	$("#Search").click(function(){
+        $("#loading").show();
 		let value = document.getElementById("form").value;
 		let type = document.getElementById("select").value;
+        
+
 		if(type==="cityname"){
+
 			$.ajax({
         		url: '/city_name',
         		type: 'POST',
         		data:{city_name:value},
         		success: function (data) {
-                    console.log(data.forecast.list);
-                    
+                    $("#loading").hide();
                     show(data.weather,data.forecast);
                     drawhourtable(data.forecast.list);
                     drawdaytable(data.forecast.list);
@@ -69,4 +73,17 @@ $(document).ready(function () {
 		}
 		return false;
 	});
+
+    
+
+    $("#show_table").click(function(){
+        if($(this).is(":checked")){
+            $("#day_table").hide();
+            $("#hour_table").show();
+        }else{
+            $("#day_table").show();
+            $("#hour_table").hide();
+        }
+    });
+
 });
