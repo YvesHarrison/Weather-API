@@ -9,3 +9,6 @@
 npm install
 npm start
 ```
+
+## Usage
+![avatar](/image/id.png)
